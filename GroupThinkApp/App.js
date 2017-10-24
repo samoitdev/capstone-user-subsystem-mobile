@@ -12,27 +12,21 @@ import {
   View
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import { UIManager } from 'react-native';
+import { ApolloProvider } from 'react-apollo';
+
+import { store, client } from './src/store';
+import { colors } from './src/utils/constants';
+
+import AppNavigator from './src/navigations';
 
 export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+
+      <ApolloProvider store={store} client={client}>
+          <AppNavigator />
+      </ApolloProvider>
     );
   }
 }
