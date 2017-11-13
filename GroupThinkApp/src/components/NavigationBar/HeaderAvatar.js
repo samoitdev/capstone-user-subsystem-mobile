@@ -42,11 +42,19 @@ const styles = StyleSheet.create({
 		marginRight: 15, 
 		justifyContent: 'center',
 		alignItems: 'center',
+
 	},
 	avatar: {
 		height: AVATAR_SIZE,
 		width: AVATAR_SIZE,
 		borderRadius: AVATAR_RADIUS,
+				shadowColor: 'black',
+		shadowOffset: {
+			width: 20,
+			height: 30
+		},
+		shadowRadius: 30,
+		shadowOpacity: 0.3,
 	}
 });
 

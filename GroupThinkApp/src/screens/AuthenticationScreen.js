@@ -1,95 +1,108 @@
 import React, { Component } from 'react';
-import styled from 'styled-components/native';
-import Touchable from '@appandflow/touchable';
+import { 
+	View,
+	TextInput,
+	TouchableOpacity,
+	StyleSheet } from 'react-native';
+import { Text } from 'react-native-animatable';
 
-import SignUpForm from '../../components/Authentication/SignUpForm';
-//import LoginForm from '../../components/Authentication/LoginForm';
+//Containers
+import SignUpForm from './Authentication/SignUpForm';
+import SignInForm from './Authentication/SignInForm';
 
-import { Fonts } from '../../utils/fonts';
+//Components
+import DefaultButton from '../components/Buttons/DefaultButton';
 
-const Root = styled.View`
-	flex: 1;
-	position: relative;
-`;
-
-const T = styled.Text`
-fontFamily: ${Fonts.Lato};
-color: white;
-
-`;
-
-const ButtonSignUp= styled(Touchable).attrs({
-	feedback: 'opacity'
-})`
-	height: 45; 
-	width: 150; 
-	borderRadius: 15px;
-	backgroundColor: #C2A1A1;
-	alignItems: center;
-	justifyContent: center;
-	alignSelf: center;
-	position: absolute; 
-	top:40%;
+import { Fonts } from '../utils/fonts';
 
 
-`;
-
-const ButtonLogin= styled(Touchable).attrs({
-	feedback: 'opacity'
-})`
-	height: 45; 
-	width: 150; 
-	borderRadius: 15px;
-	backgroundColor: #C2A1A1;
-	alignItems: center;
-	justifyContent: center;
-	alignSelf: center;
-	position: absolute; 
-	top:48%;
-
-
-`;
 
 const initialState = {
 		showSignUpForm: false,
-		showLoginForm: false
+		showSignInForm: false
 	} 
 
 class AuthenticationScreen extends Component {
 	state = initialState;
 
 	_onShowSignUpPressed = () => this.setState({ showSignUpForm: true });
-	_onShowLoginPressed = () => this.setState({ showLoginForm: true });
+	_onShowSignInPressed = () => this.setState({ showSignInForm: true });
 	_onBackPress = () => this.setState({ ...initialState });
 
 	render() {
+
 		if(this.state.showSignUpForm) {
 			return (
-				<Root>
-					<SignUpForm onBackPress={this._onBackPress} />
-				</Root>
-			)
+				<SignUpForm onBackPress={this._onBackPress}/>
+			);
 		}
 
-		if(this.state.showLoginForm) {
+		if(this.state.showSignInForm) {
 			return (
-				<Root>
-					<LoginForm  onBackPress={this._onBackPress}/>
-				</Root>
-			)
+				<SignInForm onBackPress={this._onBackPress}/>
+			);
 		}
-		return (
-			<Root>
-				<ButtonSignUp onPress={this._onShowSignUpPressed}>
-					<T>Sign Up</T>
-				</ButtonSignUp>
-				<ButtonLogin onPress={this._onShowLoginPressed}>
-					<T>Login</T>
-				</ButtonLogin>
 
-			</Root>
+
+		return (
+			<View style={styles.container}>
+				<View style={styles.titleContainer}>
+					<Text
+					animation={'fadeInDown'}
+					duration={2000}
+					style={styles.title}
+					>
+					GroupThink
+					Plain
+					</Text>
+				</View>
+				<View style={styles.actionsContainer}>
+					<View style={styles.signupButtonContainer}>
+						<DefaultButton
+							onPress={this._onShowSignUpPressed}
+							text={"Sign Up"}
+						/>
+					</View>
+					<View style={styles.loginButtonContainer}>
+						<DefaultButton
+							onPress={this._onShowSignInPressed}
+							text={"Sign In"}
+						/>
+					</View>
+				</View>
+			</View>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+	actionsContainer: {
+		flex: 1,
+		flexDirection: 'row',
+	},
+	loginButtonContainer: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	signupButtonContainer: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	titleContainer: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	title: {
+		fontSize: 30,
+		fontFamily: Fonts.LatoHeavy,
+		textAlign: 'center'
+	}
+});
 
 export default AuthenticationScreen;

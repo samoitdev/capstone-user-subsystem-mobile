@@ -1,8 +1,8 @@
 import { gql } from 'react-apollo';
 
 export default gql`
-	{
-		getDecisionPolls {
+	query getDecisionPoll($_id: String){
+		getDecisionPoll(_id: $_id) {
 			_id
 			title
 		}

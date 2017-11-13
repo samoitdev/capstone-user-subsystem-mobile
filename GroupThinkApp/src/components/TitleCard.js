@@ -20,11 +20,14 @@ class TitleCard extends Component {
 
 const styles = StyleSheet.create({
 	container: {
+		flex: 1,
 		height: 80,
-		backgroundColor: 'rgb(200,220,226)',
-		marginBottom: 20,
+		backgroundColor: 'rgb(200,220,200)',
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		margin: 5, 
+		padding: 5,
+		width: '100%'
 	},
 	title: {
 		color: 'white',	

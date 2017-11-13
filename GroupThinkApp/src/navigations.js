@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
 import { 
 	Platform,
+	Text,
+	TouchableOpacity,
 	Image,
+	StyleSheet,
 } from 'react-native';
 import { addNavigationHelpers, StackNavigator, TabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 
+
+import AuthenticationScreen from './screens/AuthenticationScreen';
 import FeedScreen from './screens/FeedScreen';
 import CreateScreen from './screens/CreateScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import DecisionPollScreen from './screens/DecisionPollScreen';
 
 import HeaderAvatar from './components/NavigationBar/HeaderAvatar';
 import HeaderLogo from './components/NavigationBar/HeaderLogo';
 
-import RegistrationForm from './components/Authentication/RegistrationForm';
 
-/*
 const Tabs = TabNavigator({
 	FeedScreen: {
 		screen: FeedScreen,
-		navigationOptions: () => ({
-				headerTitle: 'Feed',
-		})
+			navigationOptions: ({ navigation }) => ({
+				headerTitle: 'Feed'
+			})
 	},
 	CreateScreen: {
 		screen: CreateScreen,
@@ -39,48 +43,24 @@ const Tabs = TabNavigator({
 	lazy: true,
 	tabBarPosition: 'bottom',
 	swipeEnabled: false, 
-});*/
+});
 
 
 
 const AppMainNavigation = StackNavigator({
 		Feed: {
-			screen: FeedScreen,
-			navigationOptions: ({ navigation }) => ({
-				headerRight: <HeaderAvatar 
-				onPress={() => navigation.navigate('Profile')}
-				/>,
-				headerTitle: 'Feed'
-			})
+			screen: Tabs,
 		},
 		Profile: {
 			screen: ProfileScreen,
-		}
+		},
 		},
 			{ 
 				cardStyle: {
 					backgroundColor: 'white'
 				},
-				navigationOptions: () => ({
-					headerStyle: {
-						backgroundColor: 'white'
-					},
-					headerTitleStyle: {
-						color: 'black'
-					}
-				})
 
 			});	
-
-
-
-/*
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});*/
 
 class AppNavigator extends Component {
 	render() {
@@ -90,12 +70,13 @@ class AppNavigator extends Component {
 		});
 
 		if(!this.props.user.isAuthenticated) {
-			return <RegistrationForm />
+			return <AuthenticationScreen />
 		}
 
 		return <AppMainNavigation navigation={navigation} />
 	}
 }
+
 
 export default connect(
 	state => ({
