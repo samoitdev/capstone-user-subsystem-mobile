@@ -5,11 +5,10 @@ import {
   Text,
   View,
   AsyncStorage,
+  UIManager
 } from 'react-native';
 
 import Loading from './src/components/Loading';
-
-import { UIManager } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 
 import { store, client } from './src/store';
@@ -21,6 +20,10 @@ import { login } from './src/reducer-actions/user-actions';
 
 //Components being tested
 import TitleCard from './src/components/TitleCard';
+
+if (UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 export default class App extends Component<{}> {
 

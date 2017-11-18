@@ -56,7 +56,7 @@ class Choice extends Component {
   renderSlide = ({ item }) => {
     return (
       <ChoiceSlide
-        source={"https://lorempixel.com/400/200/"}
+        source={"https://i.ytimg.com/vi/7I8OeQs7cQA/maxresdefault.jpg"}
         slidePressed={this._slidePressed}
         ref={(ref) => this.slideRefs = {...this.slideRefs, [`${item._id}`]: ref}}
       />
@@ -76,16 +76,13 @@ class Choice extends Component {
       <View
         style={styles.container}
       >
-          <FlatList
+            <FlatList
             horizontal={true}
             pagingEnabled={true}
             showsHorizontalScrollIndicator={false}
             onScroll={Animated.event(
               [{ nativeEvent: { contentOffset: { x: this.animScrollXVal } } }]
             )}
-            style={{
-              overflow: 'hidden',
-            }}
             data={this.props.choices}
             renderItem={this.renderSlide}
 
@@ -118,6 +115,7 @@ class Choice extends Component {
               />
             </Animated.View>
           </View>
+    
       </View>
 
     )
